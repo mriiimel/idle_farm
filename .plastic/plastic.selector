@@ -1,0 +1,4 @@
+repository "IDLE_FARM@Mr_IIImel@cloud"
+  path "/"
+    br "/main"
+    co "/main"
