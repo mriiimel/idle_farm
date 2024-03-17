@@ -5,21 +5,19 @@ using UnityEngine;
 public class TestScreenChange : MonoBehaviour
 {
     [SerializeField] private WindowChanger winCh;
-    
+    private int _screenWidth;
+    private int _screenHeight;
     void Start()
     {
         
-        for(int i = 0; i < winCh.screenCounts.Count; i++)
-        {
-            var screen = winCh.screenCounts[i];
-            if (winCh.TypeSpase != screen.spaceScreen) return;
-            winCh.WindowsChanger(screen.Width, screen.Height);
-        }
+        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (winCh == null) Debug.Log("Windows Changer is null");
+        winCh.ChangeWindowSpace();
     }
 }

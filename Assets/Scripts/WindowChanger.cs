@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using Unity.VisualScripting;
+using UnityEditor.UI;
 using UnityEngine;
 using Screen = UnityEngine.Device.Screen;
 
@@ -10,17 +13,30 @@ public class WindowChanger : ScriptableObject
     [SerializeField] private FullScreenMode _fullscreenMode;
     [Space(10)]
     [SerializeField] private TypeSpaseScreen _typeSpaseScreen;
-    [SerializeField] private uint _screenRate;
+    [SerializeField] private int _screenRate;
     
+
     public RefreshRate _maxWindowFPS { get; set; }
-    public uint ScreenRate { get { return _screenRate; } }
+   
 
-    public TypeSpaseScreen TypeSpase { get { return _typeSpaseScreen;} }
-
-    
-    public void WindowsChanger(int width, int height)
+    public void ChangeWindowSpace()
     {
-        Screen.SetResolution(width,height,_fullscreenMode,60);            
+        for (int i = 0; i < screenCounts.Count; i++)
+        {
+            var screen = screenCounts[i];
+            if (_typeSpaseScreen == screen.spaceScreen)
+            {
+                WindowsChanger(screen.Width, screen.Height);
+            }
+            
+            
+        }
+    }
+    private void WindowsChanger(int width, int height)
+    {
+        if (_screenRate <= 0) return;
+        
+        Screen.SetResolution(width,height,_fullscreenMode,_screenRate);            
 
     }
 }
